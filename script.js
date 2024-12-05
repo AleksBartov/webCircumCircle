@@ -14,8 +14,14 @@ ctx.beginPath();
 function handlerMouseStart(ev) {
   ev.preventDefault();
 
-  ctx.arc(ev.pageX, ev.pageY, 3, 0, 2 * Math.PI);
-  points.push({ x: ev.pageX, y: ev.pageY });
+  ctx.arc(
+    ev.changedTouches[0].pageX,
+    ev.changedTouches[0].pageY,
+    3,
+    0,
+    2 * Math.PI
+  );
+  points.push({ x: ev.changedTouches[0].pageX, y: ev.changedTouches[0].pageY });
 
   ctx.lineWidth = 1;
   ctx.strokeStyle = "red";
@@ -25,8 +31,8 @@ function handlerMouseStart(ev) {
 function handlerMouseMove(ev) {
   ev.preventDefault();
   ctx.moveTo(points[points.length - 1].x, points[points.length - 1].y);
-  ctx.lineTo(ev.pageX, ev.pageY);
-  points.push({ x: ev.pageX, y: ev.pageY });
+  ctx.lineTo(ev.changedTouches[0].pageX, ev.changedTouches[0].pageY);
+  points.push({ x: ev.changedTouches[0].pageX, y: ev.changedTouches[0].pageY });
   ctx.lineWidth = 1;
   ctx.strokeStyle = "red";
   ctx.stroke();
@@ -40,9 +46,9 @@ function handlerMouseEnd(ev) {
 
 function startup() {
   const el = document.getElementById("can");
-  el.addEventListener("mousedown", handlerMouseStart);
-  el.addEventListener("mousemove", handlerMouseMove);
-  el.addEventListener("mouseup", handlerMouseEnd);
+  el.addEventListener("touchstart", handlerMouseStart);
+  el.addEventListener("touchmove", handlerMouseMove);
+  el.addEventListener("touchend", handlerMouseEnd);
 }
 
 document.addEventListener("DOMContentLoaded", startup);
