@@ -2,12 +2,6 @@ const points = [];
 
 const canvas = document.getElementById("can");
 const ctx = canvas.getContext("2d");
-ctx.beginPath();
-ctx.arc(200, 200, 150, 0, 2 * Math.PI);
-ctx.lineWidth = 1;
-ctx.strokeStyle = "rgba(0,0,0,0.3)";
-ctx.stroke();
-ctx.closePath();
 
 ctx.beginPath();
 
@@ -17,7 +11,7 @@ function handlerMouseStart(ev) {
   ctx.arc(
     ev.changedTouches[0].pageX,
     ev.changedTouches[0].pageY,
-    3,
+    15,
     0,
     2 * Math.PI
   );
@@ -25,7 +19,7 @@ function handlerMouseStart(ev) {
 
   ctx.lineWidth = 1;
   ctx.strokeStyle = "red";
-  ctx.fill();
+  ctx.stroke();
 }
 
 function handlerMouseMove(ev) {
@@ -33,8 +27,8 @@ function handlerMouseMove(ev) {
   ctx.moveTo(points[points.length - 1].x, points[points.length - 1].y);
   ctx.lineTo(ev.changedTouches[0].pageX, ev.changedTouches[0].pageY);
   points.push({ x: ev.changedTouches[0].pageX, y: ev.changedTouches[0].pageY });
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = "red";
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "gray";
   ctx.stroke();
 }
 
